@@ -14,8 +14,11 @@ public class Spirograph extends PApplet {
 	float R = 0;
 	float r = 0;
 	float a = 0;
+	int red = 255;
+	int green = 255;
+	int blue = 255;
+	String s;
 	ArrayList<PVector> path = new ArrayList<PVector>();
-
 	Color c;
 
 	public void settings() {
@@ -23,27 +26,37 @@ public class Spirograph extends PApplet {
 		 path = new ArrayList<PVector>();
 
 //		  //radius of ring
-		  R = 300;
+		  //R = 300;
 //
 //		  //radius of disk
-		  r =50;
+		  //r =50;
 //
 //		  //distance from trace point in disk to center of disk
-		  a = 20;
-		  c = new Color((int)(Math.random() * 0x1000000));
+		  //a = 20;
+		 // c = new Color((int)(Math.random() * 0x1000000));
 	   // 	R =  (float) Math.floor(Math.random()*(50-300+1)+50);
 	   // 	r =  (float) Math.floor(Math.random()*(1-100+1)+1);
 	   // 	a =  (float) Math.floor(Math.random()*(1-50+1)+1);
 		  
-		  
+		  mouseClicked();
 	}
 
 public void mouseClicked() {
+	
+	
     	path = new ArrayList<PVector>();
-    	R =  (float) Math.floor(Math.random()*(100-200+1)+1);
-    	r =  (float) Math.floor(Math.random()*(77-R+1)+R);
-    	a =  (float) Math.floor(Math.random()*(10-r+1)+r);
-		c = new Color((int)(Math.random() * 0x1000000));
+    	R =  (float) Math.floor(Math.random()*(200));
+    	r =  (float) Math.floor(Math.random()*(200));
+    	a =  (float) Math.floor(Math.random()*(200));
+    	
+    	red = (int) Math.floor(Math.random()*(255-100+1)+100);
+    	green = (int) Math.floor(Math.random()*(255-100+1)+100);
+    	blue = (int)  Math.floor(Math.random()*(255-100+1)+100);
+    	
+
+
+		s = "R:" + R  + "r:" + r  + "a:" + a;
+		
 }
 	
 	
@@ -70,6 +83,7 @@ public void mouseClicked() {
 	public void draw() {
 		  background(55);
 		  update();
+		  text(s, 10, 590);
 		  stroke(200,200,200,100);
 		  ellipse(300,300,R+R, R+R);
 		  
@@ -100,7 +114,7 @@ public void mouseClicked() {
 		  
 		  for (PVector point : path){
 		    vertex(point.x, point.y);
-		    stroke(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+		    stroke(red,green,blue,255);
 		    //line(path.get(path.size()-1).x,path.get(path.size()-1).y, point.x, point.y);
 		  }
 		  endShape();
