@@ -44,11 +44,11 @@ public class Spirograph extends PApplet {
 		};
 	
 	public void settings() {
-		  size(1000, 1000);
+		  size(displayWidth, displayHeight);
     	 path = new ArrayList<PVector>();
-	    	R =  (float) Math.floor(Math.random()*(200));
-	    	r =  (float) Math.floor(Math.random()*(200));
-	    	a =  (float) Math.floor(Math.random()*(200));
+	    	R =  (float) Math.floor(Math.random()*((displayHeight/4)));
+	    	r =  (float) Math.floor(Math.random()*((displayHeight/4)));
+	    	a =  (float) Math.floor(Math.random()*((displayHeight/4)));
 	    	
 	    	red = (int) Math.floor(Math.random()*(255-100+1)+100);
 	    	green = (int) Math.floor(Math.random()*(255-100+1)+100);
@@ -114,7 +114,7 @@ public void mouseClicked() {
 	    theta += resolution;
 	    float x = (R-r)*cos(theta) + a*cos(((R-r)/r)*theta);
 	    float y = (R-r)*sin(theta) - a*sin(((R-r)/r)*theta);
-	    PVector pv = new PVector(x+500,y+500);
+	    PVector pv = new PVector(x+(displayWidth/2),y+(displayHeight/2));
 		path.add(pv);
 	}	
 	
@@ -145,9 +145,9 @@ public void mouseClicked() {
 		}
 		//we want a new spirographic
 		else if (itteration > history.size()) {
-	    	R =  (float) Math.floor(Math.random()*(200));
-	    	r =  (float) Math.floor(Math.random()*(200));
-	    	a =  (float) Math.floor(Math.random()*(200));
+	    	R =  (float) Math.floor(Math.random()*((displayHeight/4)));
+	    	r =  (float) Math.floor(Math.random()*((displayHeight/4)));
+	    	a =  (float) Math.floor(Math.random()*((displayHeight/4)));
 			PVector newOne = new PVector((int)Math.floor(R), (int)Math.floor(r), (int)Math.floor(a));
 	    	history.add(newOne);
 	    	setUpForNextShape(newOne);
@@ -169,22 +169,22 @@ public void mouseClicked() {
 		  
 		  
 		  //center of ring
-		  ellipse(500,500,R+R, R+R);
+		  ellipse((displayWidth/2),(displayHeight/2),R+R, R+R);
 		  
 		  //center of disk
 		  float innerCircleCenX = path.get(path.size()-1).x;
 		  float innerCircleCenY = path.get(path.size()-1).y;
 		  
 		  float rsum =  R - r;
-	      innerCircleCenX = 500 + rsum * cos(theta);
-	      innerCircleCenY = 500 + rsum * sin(theta);
+	      innerCircleCenX = (displayWidth/2) + rsum * cos(theta);
+	      innerCircleCenY = (displayHeight/2) + rsum * sin(theta);
 				  
 	      
 		  ellipse(innerCircleCenX,innerCircleCenY,r*2, r*2);
 		  ellipse(path.get(path.size()-1).x,path.get(path.size()-1).y,5, 5);
 		  
 		  //line from origin to center of disk
-		  line(500,500, innerCircleCenX, innerCircleCenY);
+		  line((displayWidth/2),(displayHeight/2), innerCircleCenX, innerCircleCenY);
 		  //line from center of disk to pen circle
 		  line(path.get(path.size()-1).x,path.get(path.size()-1).y, innerCircleCenX, innerCircleCenY);
 		  noFill();
